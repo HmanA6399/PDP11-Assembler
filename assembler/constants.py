@@ -63,17 +63,19 @@ OPCODE_TYPE = [
     OpcodeType.DOUBLE,
     OpcodeType.JUMP
 ]
-DEFINE_REGEX = "^DEFINE$"
-
 REG_COUNT = 7
 REG_BIT_COUNT = 3
 PC_REG = 7
+MODES_COUNT = 4 # Direct or indirect
 
 INDIRECT_BIT = 5 # From starting of operand code
 REG_SUBREGEX = f"[Rr][0-{REG_COUNT}]"
 REG_REGEX = f"(?<!\w)({REG_SUBREGEX})(?!\w)"
 SYMBOL_NAME_REGEX = "[A-Za-z_]{1}[A-Za-z0-9_]*"
 INDIRECT_REGEX= "^@"
+DEFINE_REGEX = "^define$"
+INDEX_MATCHER = "[0-9]{1,}(?=\()"
+IMMEDIATE_VALUE_MATCHER = "(?<=#)[0-9]{1,}"
 
 NON_PC_MODES = ["REGISTER", "AUTO_INC", "AUTO_DEC", "INDEXED"]
 PC_MODES = ["IMMEDIATE", "RELATIVE"]
@@ -83,7 +85,7 @@ MODE_CODE = {
     "AUTO_INC" : 1,
     "AUTO_DEC" : 2,
     "INDEXED"  : 3,
-    "IMMEDIATE": 2, # Same as AUTO_INC
+    "IMMEDIATE": 1, # Same as AUTO_INC
     "RELATIVE" : 3, # Same as INDEXED
 }
 
@@ -91,7 +93,7 @@ MODE_REGEX = {
     "REGISTER" : f"^{REG_SUBREGEX}$",
     "AUTO_INC" : f"^\({REG_SUBREGEX}\)\+$",
     "AUTO_DEC" : f"^-\({REG_SUBREGEX}\)$",
-    "INDEXED"  : f"^[0-9].*\({REG_SUBREGEX}\)$",
+    "INDEXED"  : f"^\(?[0-9].*\({REG_SUBREGEX}\)\)?$",
     "IMMEDIATE": "^#[0-9].*$",
     "RELATIVE" : f"^{SYMBOL_NAME_REGEX}$"
 }
