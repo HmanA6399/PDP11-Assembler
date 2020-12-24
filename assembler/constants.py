@@ -12,55 +12,63 @@ class OpcodeType(Enum) :
 
 OPCODES_DICT = {
     # 2 OPERAND => At most 4 bits
-    'MOV'   : 0o00,
-    'ADD'   : 0o01,
-    'ADC'   : 0o02,
-    'SUB'   : 0o03,
-    'SBC'   : 0o04,
-    'AND'   : 0o05,
-    'OR'    : 0o06,
-    'XOR'   : 0o07,
-    'CMP'   : 0o10,
+    'MOV'   : 0b0000,
+    'ADD'   : 0b0001,
+    'ADC'   : 0b0010,
+    'SUB'   : 0b0011,
+    'SBC'   : 0b0100,
+    'AND'   : 0b0101,
+    'OR'    : 0b0110,
+    'XOR'   : 0b0111,
+    'CMP'   : 0b1000,
     # I'll leave the rest of 0o5x if any 2 operand is intended to be added
 
-    # NO OPERAND
-    'HALT'  : 0o20,
-    'NOP'   : 0o21,
-    'RESET' : 0o22,
-    
-    # BRANCH
-    'BR'    : 0o30,
-    'BEQ'   : 0o31,
-    'BNE'   : 0o32,
-    'BLO'   : 0o33,
-    'BLS'   : 0o34,
-    'BHI'   : 0o35,
-
     # SINGLE OPERAND
-    'INC'   : 0o40,
-    'DEC'   : 0o42,
-    'CLR'   : 0o43,
-    'INV'   : 0o44,
-    'LSR'   : 0o45,
-    'ROR'   : 0o46,
-    'ASR'   : 0o47,
-    'LSL'   : 0o50,
+    'INC'   : 0b00001001,
+    'DEC'   : 0b00011001,
+    'CLR'   : 0b00101001,
+    'INV'   : 0b00111001,
+    'LSR'   : 0b01001001,
+    'ROR'   : 0b01011001,
+    'ASR'   : 0b01101001,
+    'LSL'   : 0b01111001,
     # I'll leave the rest of 0o3x if any single operand is intended to be added
 
+    # NO OPERAND
+    'HLT'  :  0b001010,
+    'NOP'   : 0b011010,
+    'RESET' : 0b101010,
+    
+    # BRANCH
+    'BR'    : 0b0001011,
+    'BEQ'   : 0b0011011,
+    'BNE'   : 0b0101011,
+    'BLO'   : 0b0111011,
+    'BLS'   : 0b1001011,
+    'BHI'   : 0b1011011,
+    'BHS'   : 0b1101011,
+
+
     # JUMP INSTRUCTIONS
-    'JSR'   : 0o60,
-    'RTS'   : 0o61,
-'INTERRUPT' : 0o62,
-    'IRET'  : 0o63,
+    'JSR'   : 0b001100,
+    'RTS'   : 0b011100,
+'INTERRUPT' : 0b101100,
+    'IRET'  : 0b111100,
 }
 
 OPCODE_TYPE = [
     OpcodeType.DOUBLE,
     OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
+    OpcodeType.SINGLE,
     OpcodeType.NO_OPD,
     OpcodeType.BRANCH,
-    OpcodeType.SINGLE,
-    OpcodeType.SINGLE,
     OpcodeType.JUMP
 ]
 REG_COUNT = 7
