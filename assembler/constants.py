@@ -12,48 +12,48 @@ class OpcodeType(Enum) :
 
 OPCODES_DICT = {
     # 2 OPERAND => At most 4 bits
-    'MOV'   : 0b0000,
-    'ADD'   : 0b0001,
-    'ADC'   : 0b0010,
-    'SUB'   : 0b0011,
-    'SBC'   : 0b0100,
-    'AND'   : 0b0101,
-    'OR'    : 0b0110,
-    'XOR'   : 0b0111,
-    'CMP'   : 0b1000,
+    'MOV'   : 0b0000,   # 0x00
+    'ADD'   : 0b0001,   # 0x01
+    'ADC'   : 0b0010,   # 0x02
+    'SUB'   : 0b0011,   # 0x03
+    'SBC'   : 0b0100,   # 0x04
+    'AND'   : 0b0101,   # 0x05
+    'OR'    : 0b0110,   # 0x06
+    'XOR'   : 0b0111,   # 0x07
+    'CMP'   : 0b1000,   # 0x08
     # I'll leave the rest of 0o5x if any 2 operand is intended to be added
 
     # SINGLE OPERAND
-    'INC'   : 0b00001001,
-    'DEC'   : 0b00011001,
-    'CLR'   : 0b00101001,
-    'INV'   : 0b00111001,
-    'LSR'   : 0b01001001,
-    'ROR'   : 0b01011001,
-    'ASR'   : 0b01101001,
-    'LSL'   : 0b01111001,
+    'INC'   : 0b00001001,   # 0x009
+    'DEC'   : 0b00011001,   # 0x019
+    'CLR'   : 0b00101001,   # 0x029
+    'INV'   : 0b00111001,   # 0x039
+    'LSR'   : 0b01001001,   # 0x049
+    'ROR'   : 0b01011001,   # 0x059
+    'ASR'   : 0b01101001,   # 0x069
+    'LSL'   : 0b01111001,   # 0x079
     # I'll leave the rest of 0o3x if any single operand is intended to be added
 
     # NO OPERAND
-    'HLT'  :  0b001010,
-    'NOP'   : 0b011010,
-    'RESET' : 0b101010,
+    'HLT'  :  0b001010,     # 0x00a
+    'NOP'   : 0b011010,     # 0x01a
+    'RESET' : 0b101010,     # 0x02a
     
     # BRANCH
-    'BR'    : 0b0001011,
-    'BEQ'   : 0b0011011,
-    'BNE'   : 0b0101011,
-    'BLO'   : 0b0111011,
-    'BLS'   : 0b1001011,
-    'BHI'   : 0b1011011,
-    'BHS'   : 0b1101011,
+    'BR'    : 0b0001011,    # 0x00b
+    'BEQ'   : 0b0011011,    # 0x01b
+    'BNE'   : 0b0101011,    # 0x02b
+    'BLO'   : 0b0111011,    # 0x03b
+    'BLS'   : 0b1001011,    # 0x04b
+    'BHI'   : 0b1011011,    # 0x05b
+    'BHS'   : 0b1101011,    # 0x06b
 
 
     # JUMP INSTRUCTIONS
-    'JSR'   : 0b001100,
-    'RTS'   : 0b011100,
-'INTERRUPT' : 0b101100,
-    'IRET'  : 0b111100,
+    'JSR'   : 0b001100,     # 0x00c
+    'RTS'   : 0b011100,     # 0x01c
+'INTERRUPT' : 0b101100,     # 0x02c
+    'IRET'  : 0b111100,     # 0x03c
 }
 
 OPCODE_TYPE = [
