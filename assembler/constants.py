@@ -72,10 +72,12 @@ INDIRECT_BIT = 5 # From starting of operand code
 REG_SUBREGEX = f"[Rr][0-{REG_COUNT}]"
 REG_REGEX = f"(?<!\w)({REG_SUBREGEX})(?!\w)"
 SYMBOL_NAME_REGEX = "[A-Za-z_]{1}[A-Za-z0-9_]*"
-INDIRECT_REGEX= "^@"
-DEFINE_REGEX = "^define$"
-INDEX_MATCHER = "[0-9]{1,}(?=\()"
-IMMEDIATE_VALUE_MATCHER = "(?<=#)[0-9]{1,}"
+INDIRECT_REGEX= r'^@'
+DEFINE_REGEX = r'^define$'
+INDEX_MATCHER = r'[0-9]{1,}(?=\()'
+IMMEDIATE_VALUE_MATCHER = r'(?<=#)[0-9]{1,}'
+COMMENT_REGEX = r';.*'
+SEGMENT_REGEX = r'[A-Za-z0-9@\(\)#\+\-]+' 
 
 NON_PC_MODES = ["REGISTER", "AUTO_INC", "AUTO_DEC", "INDEXED"]
 PC_MODES = ["IMMEDIATE", "RELATIVE"]
@@ -94,6 +96,6 @@ MODE_REGEX = {
     "AUTO_INC" : f"^\({REG_SUBREGEX}\)\+$",
     "AUTO_DEC" : f"^-\({REG_SUBREGEX}\)$",
     "INDEXED"  : f"^\(?[0-9].*\({REG_SUBREGEX}\)\)?$",
-    "IMMEDIATE": "^#[0-9].*$",
+    "IMMEDIATE": r"^#[0-9].*$",
     "RELATIVE" : f"^{SYMBOL_NAME_REGEX}$"
 }
