@@ -115,6 +115,6 @@ class Tokenizer(metaclass=SingletonMeta.SingletonMeta):
             elif (opcode_token.typ == constants.OpcodeType.JUMP):
                 [extra_tokens.append(t) for t in [token_types.SymbolAbsoluteReferenceToken(statement[1]), token_types.LineBreakToken()]]
         
-        primary_tokens.append(token_types.LineBreakToken())
+            primary_tokens.append(token_types.LineBreakToken())
         return primary_tokens, extra_tokens
     pass
