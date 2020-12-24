@@ -1,9 +1,9 @@
-import SingeltonMeta
+import SingletonMeta
 import constants
 import tokenizer.token_types
 import re
 
-class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
+class Tokenizer(metaclass=SingletonMeta.SingletonMeta):
     def createOpcodeToken(self, assem_str):
         """
         Given assembly operation string, create a new token with the proper code and type
