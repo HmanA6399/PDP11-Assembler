@@ -8,9 +8,10 @@ class SymbolStore(metaclass=singleton.SingletonMeta):
     
     def setSymbol(self, key, value, position):
         self.symbols[key] = {
-            'value': value,
+            'value': int(value),
             'position': position,
         }
+        print(f"Symbol stored : {self.symbols[key]}")
 
 class LabelStore(metaclass=singleton.SingletonMeta):
     labels = {}
@@ -20,3 +21,4 @@ class LabelStore(metaclass=singleton.SingletonMeta):
     
     def setLabel(self, label_name, label_offset):
         self.labels[label_name] = label_offset
+        print(f"Label stored : {label_name} => {self.labels[label_name]}")

@@ -9,7 +9,7 @@ class Token():
     code : int = None
     
     def __str__(self):
-        return str(oct(self.code))
+        return str(oct(int(self.code)))
         pass
     
     def getCode(self):

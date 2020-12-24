@@ -2,6 +2,7 @@ import SingeltonMeta
 import constants
 import tokenizer.token_types
 import re
+import stores
 
 class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
     def createOpcodeToken(self, assem_str):
@@ -13,7 +14,7 @@ class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
         code = constants.OPCODES_DICT[assem_str.upper()]
 
         # Determine type of operation
-        typ = constants.OPCODE_TYPE[code >> 3]
+        typ = constants.OPCODE_TYPE[code & 0x0F]
         
         return token_types.OpcodeToken(code, typ)
         pass
@@ -59,7 +60,7 @@ class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
             # PC (RELATIVE)
             if (operand_first_token.reg == constants.PC_REG):
                 symbol_name = re.search(constants.SYMBOL_NAME_REGEX, assem_str).group()
-                operand_extra_token = token_types.SymbolRelativeReferenceToken(symbol_name, position)
+                operand_extra_token = token_types.SymbolRelativeReferenceToken(symbol_name, position+1)
             
             # Non PC
             else:
@@ -79,8 +80,10 @@ class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
 
         # Assignment
         if (re.match(constants.DEFINE_REGEX, statement[0], flags=re.IGNORECASE)):
+            sym_store = stores.SymbolStore()
+            sym_store.setSymbol(statement[1], statement[2], position)
             primary_tokens.append(token_types.SymbolToken(statement[1], statement[2]))
-            primary_tokens.append(LineBreakToken())
+            primary_tokens.append(token_types.LineBreakToken())
         
         # Operation
         else:
