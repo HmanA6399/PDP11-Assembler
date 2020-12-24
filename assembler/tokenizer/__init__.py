@@ -77,6 +77,8 @@ class Tokenizer(metaclass=SingletonMeta.SingletonMeta):
         primary_tokens = []
         extra_tokens = []
 
+        if (len(statement) == 0) : return primary_tokens, extra_tokens  # Handle empty sentence case
+        
         # Assignment
         if (re.match(constants.DEFINE_REGEX, statement[0], flags=re.IGNORECASE)):
             primary_tokens.append(token_types.SymbolToken(statement[1], statement[2]))

@@ -77,7 +77,9 @@ DEFINE_REGEX = r'^define$'
 INDEX_MATCHER = r'[0-9]{1,}(?=\()'
 IMMEDIATE_VALUE_MATCHER = r'(?<=#)[0-9]{1,}'
 COMMENT_REGEX = r';.*'
-SEGMENT_REGEX = r'[A-Za-z0-9@\(\)#\+\-]+' 
+SEGMENT_REGEX = r'[A-Za-z0-9@\(\)#\+\-]+'
+# LABEL_DELIMETER_REGEX = r'[\s]*:[\s]*'
+LABEL_DELIMETER_REGEX = r':'
 
 NON_PC_MODES = ["REGISTER", "AUTO_INC", "AUTO_DEC", "INDEXED"]
 PC_MODES = ["IMMEDIATE", "RELATIVE"]
