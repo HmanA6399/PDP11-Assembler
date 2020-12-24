@@ -96,7 +96,7 @@ class SymbolAbsoluteReferenceToken(Token):
         sym_tbl = stores.SymbolStore()
         symbol = sym_tbl.getSymbol(self.symbol_name)
         
-        self.code = symbol.position
+        self.code = symbol['position']
         return Token.__str__(self)
 
 class SymbolRelativeReferenceToken(Token):

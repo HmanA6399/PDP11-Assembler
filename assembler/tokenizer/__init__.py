@@ -1,10 +1,10 @@
-import SingeltonMeta
+import SingletonMeta
 import constants
 import tokenizer.token_types
 import re
 import stores
 
-class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
+class Tokenizer(metaclass=SingletonMeta.SingletonMeta):
     def createOpcodeToken(self, assem_str):
         """
         Given assembly operation string, create a new token with the proper code and type
@@ -78,6 +78,8 @@ class Tokenizer(metaclass=SingeltonMeta.SingletonMeta):
         primary_tokens = []
         extra_tokens = []
 
+        if (len(statement) == 0) : return primary_tokens, extra_tokens  # Handle empty sentence case
+        
         # Assignment
         if (re.match(constants.DEFINE_REGEX, statement[0], flags=re.IGNORECASE)):
             sym_store = stores.SymbolStore()

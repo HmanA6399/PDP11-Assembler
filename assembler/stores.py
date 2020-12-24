@@ -1,4 +1,4 @@
-import SingeltonMeta as singleton
+import SingletonMeta as singleton
 
 class SymbolStore(metaclass=singleton.SingletonMeta):
     symbols = {}
