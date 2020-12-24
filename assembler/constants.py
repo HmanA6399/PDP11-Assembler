@@ -11,41 +11,41 @@ class OpcodeType(Enum) :
 
 
 OPCODES_DICT = {
+    # 2 OPERAND => At most 4 bits
+    'MOV'   : 0o00,
+    'ADD'   : 0o01,
+    'ADC'   : 0o02,
+    'SUB'   : 0o03,
+    'SBC'   : 0o04,
+    'AND'   : 0o05,
+    'OR'    : 0o06,
+    'XOR'   : 0o07,
+    'CMP'   : 0o10,
+    # I'll leave the rest of 0o5x if any 2 operand is intended to be added
+
     # NO OPERAND
-    'HALT'  : 0o00,
-    'NOP'   : 0o01,
-    'RESET' : 0o02,
+    'HALT'  : 0o20,
+    'NOP'   : 0o21,
+    'RESET' : 0o22,
     
     # BRANCH
-    'BR'    : 0o10,
-    'BEQ'   : 0o11,
-    'BNE'   : 0o12,
-    'BLO'   : 0o13,
-    'BLS'   : 0o14,
-    'BHI'   : 0o15,
+    'BR'    : 0o30,
+    'BEQ'   : 0o31,
+    'BNE'   : 0o32,
+    'BLO'   : 0o33,
+    'BLS'   : 0o34,
+    'BHI'   : 0o35,
 
     # SINGLE OPERAND
-    'INC'   : 0o20,
-    'DEC'   : 0o22,
-    'CLR'   : 0o23,
-    'INV'   : 0o24,
-    'LSR'   : 0o25,
-    'ROR'   : 0o26,
-    'ASR'   : 0o27,
-    'LSL'   : 0o30,
+    'INC'   : 0o40,
+    'DEC'   : 0o42,
+    'CLR'   : 0o43,
+    'INV'   : 0o44,
+    'LSR'   : 0o45,
+    'ROR'   : 0o46,
+    'ASR'   : 0o47,
+    'LSL'   : 0o50,
     # I'll leave the rest of 0o3x if any single operand is intended to be added
-
-    # 2 OPERAND
-    'MOV'   : 0o40,
-    'ADD'   : 0o41,
-    'ADC'   : 0o42,
-    'SUB'   : 0o43,
-    'SBC'   : 0o44,
-    'AND'   : 0o45,
-    'OR'    : 0o46,
-    'XOR'   : 0o47,
-    'CMP'   : 0o50,
-    # I'll leave the rest of 0o5x if any 2 operand is intended to be added
 
     # JUMP INSTRUCTIONS
     'JSR'   : 0o60,
@@ -55,12 +55,12 @@ OPCODES_DICT = {
 }
 
 OPCODE_TYPE = [
+    OpcodeType.DOUBLE,
+    OpcodeType.DOUBLE,
     OpcodeType.NO_OPD,
     OpcodeType.BRANCH,
     OpcodeType.SINGLE,
     OpcodeType.SINGLE,
-    OpcodeType.DOUBLE,
-    OpcodeType.DOUBLE,
     OpcodeType.JUMP
 ]
 REG_COUNT = 7
