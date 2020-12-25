@@ -32,6 +32,7 @@ OPCODES_DICT = {
     'ROR'   : 0b01011001,   # 0x059
     'ASR'   : 0b01101001,   # 0x069
     'LSL'   : 0b01111001,   # 0x079
+    'ROL'   : 0b10001001,   # 0x089
     # I'll leave the rest of 0o3x if any single operand is intended to be added
 
     # NO OPERAND
@@ -39,21 +40,22 @@ OPCODES_DICT = {
     'NOP'   : 0b011010,     # 0x01a
     'RESET' : 0b101010,     # 0x02a
     
-    # BRANCH
-    'BR'    : 0b0001011,    # 0x00b
-    'BEQ'   : 0b0011011,    # 0x01b
-    'BNE'   : 0b0101011,    # 0x02b
-    'BLO'   : 0b0111011,    # 0x03b
-    'BLS'   : 0b1001011,    # 0x04b
-    'BHI'   : 0b1011011,    # 0x05b
-    'BHS'   : 0b1101011,    # 0x06b
 
 
     # JUMP INSTRUCTIONS
-    'JSR'   : 0b001100,     # 0x00c
-    'RTS'   : 0b011100,     # 0x01c
-'INTERRUPT' : 0b101100,     # 0x02c
-    'IRET'  : 0b111100,     # 0x03c
+    'JSR'   : 0b001011,     # 0x00b
+    'RTS'   : 0b011011,     # 0x01b
+'INTERRUPT' : 0b101011,     # 0x02b
+    'IRET'  : 0b111011,     # 0x03b
+
+    # BRANCH
+    'BR'    : 0b0001100,    # 0x00c
+    'BEQ'   : 0b0011100,    # 0x01c
+    'BNE'   : 0b0101100,    # 0x02c
+    'BLO'   : 0b0111100,    # 0x03c
+    'BLS'   : 0b1001100,    # 0x04c
+    'BHI'   : 0b1011100,    # 0x05c
+    'BHS'   : 0b1101100,    # 0x06c
 }
 
 OPCODE_TYPE = [
@@ -68,8 +70,8 @@ OPCODE_TYPE = [
     OpcodeType.DOUBLE,
     OpcodeType.SINGLE,
     OpcodeType.NO_OPD,
-    OpcodeType.BRANCH,
-    OpcodeType.JUMP
+    OpcodeType.JUMP,
+    OpcodeType.BRANCH
 ]
 REG_COUNT = 7
 REG_BIT_COUNT = 3
