@@ -7,9 +7,9 @@ class Token():
     Generic Representation of token information
     """
     code : int = None
-    
+    nbits : int = 16
     def __str__(self):
-        return str(bin(int(self.code)))
+        return f'{int(self.code):0{self.nbits}b}';
         pass
     
     def getCode(self):
@@ -28,7 +28,7 @@ class OpcodeToken(Token):
         
         self.code = code
         self.typ = typ 
-        
+        self.nbits = constants.OPCODE_NBITS[self.typ]
         pass
     
     pass
@@ -44,6 +44,7 @@ class OperandToken(Token):
         self.reg = reg
         self.mode = mode
         self.code = ( (mode + is_indirect * constants.MODES_COUNT) << (constants.REG_BIT_COUNT)) | reg
+        self.nbits = 6
         pass
 
     pass
@@ -62,8 +63,8 @@ class LabelToken(Token):
     Represents label
     """
     label_name = ""
-
     def __init__(self, label_name) :
+        self.nbits = 8
         self.label_name = label_name
     
     def __str__(self) :
@@ -75,7 +76,6 @@ class SymbolToken(Token):
     """
     Represents a symbol define by the Define statement
     """
-
     symbol_name = ""
 
     def __init__(self, name, value):
@@ -86,7 +86,6 @@ class SymbolAbsoluteReferenceToken(Token):
     """
     Represents the absolute reference to a stored symbol
     """
-
     symbol_name = ""
 
     def __init__(self, symbol_name):
@@ -106,7 +105,6 @@ class SymbolRelativeReferenceToken(Token):
     
     symbol_name = ""
     position = 0
-
     def __init__(self, symbol_name, position):
         self.symbol_name = symbol_name
         self.position = position
@@ -116,8 +114,3 @@ class SymbolRelativeReferenceToken(Token):
         symbol = sym_tbl.getSymbol(self.symbol_name)
         self.code = symbol['position'] - self.position
         return Token.__str__(self)
-
-class LineBreakToken(Token):
-
-    def __str__(self):
-        return '\n';

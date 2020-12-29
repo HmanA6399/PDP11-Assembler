@@ -58,6 +58,14 @@ OPCODES_DICT = {
     'BHS'   : 0b1101100,    # 0x06c
 }
 
+OPCODE_NBITS = {
+    OpcodeType.DOUBLE   : 4,
+    OpcodeType.SINGLE   : 10,
+    OpcodeType.NO_OPD   : 16,
+    OpcodeType.JUMP     : 16,
+    OpcodeType.BRANCH   : 8,
+}
+
 OPCODE_TYPE = [
     OpcodeType.DOUBLE,
     OpcodeType.DOUBLE,

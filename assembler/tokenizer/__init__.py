@@ -75,46 +75,43 @@ class Tokenizer(metaclass=SingletonMeta.SingletonMeta):
         return operand_first_token, operand_extra_token
     
     def tokenizeStatement(self, statement, position):
-        primary_tokens = []
-        extra_tokens = []
+        words = [[],[],[]]
 
-        if (len(statement) == 0) : return primary_tokens, extra_tokens  # Handle empty sentence case
+        if (len(statement) == 0) : return words  # Handle empty sentence case
         
         # Assignment
         if (re.match(constants.DEFINE_REGEX, statement[0], flags=re.IGNORECASE)):
             sym_store = stores.SymbolStore()
             sym_store.setSymbol(statement[1], statement[2], position)
-            primary_tokens.append(token_types.SymbolToken(statement[1], statement[2]))
-            primary_tokens.append(token_types.LineBreakToken())
+            words[0].append(token_types.SymbolToken(statement[1], statement[2]))
         
         # Operation
         else:
             opcode_token = self.createOpcodeToken(statement[0])
-            primary_tokens.append(opcode_token)
+            words[0].append(opcode_token)
             
             # SINGLE
             if (opcode_token.typ == constants.OpcodeType.SINGLE):
                 opd_token, ext_token = self.createOperandTokens(statement[1], position)
-                primary_tokens.append(opd_token)
+                words[0].append(opd_token)
                 if (ext_token):
-                    [extra_tokens.append(t) for t in [ext_token, token_types.LineBreakToken()]]
+                    words[1].append(ext_token)
             
             # DOUBLE
             elif (opcode_token.typ == constants.OpcodeType.DOUBLE):
                 for i in range(1,3) :
                     opd_token, ext_token = self.createOperandTokens(statement[i], position)
-                    primary_tokens.append(opd_token)
+                    words[0].append(opd_token)
                     if (ext_token):
-                        [extra_tokens.append(t) for t in [ext_token, token_types.LineBreakToken()]]
+                        words[i].append(ext_token)
             
             # BRANCH
             elif (opcode_token.typ == constants.OpcodeType.BRANCH):
-                primary_tokens.append(token_types.LabelToken(statement[1]))
+                words[0].append(token_types.LabelToken(statement[1]))
             
             # JUMP
             elif (opcode_token.typ == constants.OpcodeType.JUMP):
-                [extra_tokens.append(t) for t in [token_types.SymbolAbsoluteReferenceToken(statement[1]), token_types.LineBreakToken()]]
+                words[1].append(token_types.SymbolAbsoluteReferenceToken(statement[1]))
         
-            primary_tokens.append(token_types.LineBreakToken())
-        return primary_tokens, extra_tokens
+        return words
     pass

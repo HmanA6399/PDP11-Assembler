@@ -18,7 +18,6 @@ def wordize(lines):
     for l in lines :
         if (l.rstrip()) :
             statement = parser.parseSentence(l, int(word_ctr))
-            print(statement)
             token_lists = tokenizer.tokenizeStatement(statement, int(word_ctr))
             for l in token_lists :
                 if len(l) > 0 :
@@ -28,6 +27,7 @@ def wordize(lines):
 
 
 if (__name__ == "__main__") :
+
     # Read the given file into lines
     lines = io_man.readFileIntoLines("in.asm")
 
@@ -35,10 +35,10 @@ if (__name__ == "__main__") :
     words = wordize(lines)
 
     # Stringify word tokens into lines
-    out_lines = [' '.join([str(token) for token in word]) for word in words ]
+    out_lines = [''.join([str(token) for token in word[::-1]]) + '\n' for word in words ]
 
     # Write to file
-    io_man.writeLineToFile("out.asm", out_lines)
+    io_man.writeLineToFile("out.mem", out_lines)
 
     # Close the open files
     io_man.closeOpenFiles()
