@@ -11,7 +11,7 @@ class SymbolStore(metaclass=singleton.SingletonMeta):
             'value': int(value),
             'position': position,
         }
-        print(f"Symbol stored : {self.symbols[key]}")
+        print(f"Symbol stored : {self.symbols[key.lower()]}")
 
 class LabelStore(metaclass=singleton.SingletonMeta):
     labels = {}
